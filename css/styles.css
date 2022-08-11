@@ -1,0 +1,16 @@
+.horario {
+    cursor: pointer;
+}
+
+.horario:hover {
+    background-color: #ccc;
+}
+
+.desactivado-horario {
+    cursor: default;
+    background-color: #ccc;
+}
+
+.inactivo {
+    display: none;
+}
