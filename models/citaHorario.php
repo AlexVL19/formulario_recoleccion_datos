@@ -3,7 +3,7 @@ include_once "database/database.php";
 
 class citaHorario {
     public static function getHorarios() {
-        $sql = "SELECT horario, id FROM citas_horarios";
+        $sql = "SELECT hora_inicial,hora_final, id FROM citas_horarios";
 
         $db = connection::connect();
 
@@ -15,6 +15,9 @@ class citaHorario {
 
         return $result;
     }
+
+
+    
 }
 
 ?>

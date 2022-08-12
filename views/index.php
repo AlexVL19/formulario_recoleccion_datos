@@ -7,9 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 
     <title>Citaciones</title>
@@ -21,90 +20,81 @@
 
     <div style="width:100%;display:flex;justify-content:center;padding:5px">
         <div class="card col-12" style="padding:10px;">
-            <div style="min-height:300px;">
+            <div class="banner">
+                <h1 style="color:white">Agenda tu Asesoria ya!</span>
             </div>
-            <div class="col-12 d-flex justify-content-center">
+            <div class="col-12 d-flex justify-content-center mt-4">
                 <div class="col-4">
                     <table class="table" style="width:100%;text-align:center;">
                         <thead>
                             <tr>
-                                <th scope="col">Horas</th>
+                                <th scope="col">Horarios</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php
-                                include_once "controllers/horariosController.php";
-                                include_once "controllers/citasController.php";
+                        <tbody id="horarios-tabla">
 
-                                $citas_resultado = citasController::getCitas();
 
-                                $citas_actuales = [];
-                                $horarios_actuales = [];
-
-                                if (count($citas_resultado) != 0) {
-                                    foreach($citas_resultado as $cita) {
-                                        array_push($citas_actuales, $cita['id_horario']);
-                                    }
-                                }
-                                $result = horariosController::getHorarios();
-                                if (count($result) != 0) {
-                                    foreach($result as $horario) {
-                                        array_push($horarios_actuales, $horario['id']);
-                                        
-                                    }
-                                }
-
-                                $horarios_desactivados = [];
-
-                                foreach($citas_actuales as $cita) {
-                                    if (in_array($cita, $horarios_actuales)) {
-                                        array_push($horarios_desactivados, $cita);
-                                    }
-                                }
-
-                                foreach($result as $horario) {
-
-                            ?>
-
-                            <tr onclick="show(this)" class="horario <?php if (in_array($horario['id'], $horarios_desactivados)) {
-                                echo " desactivado-horario";
-                            }?> ">
-                                <th scope="row"><?php echo $horario['horario'] ?></th>
-                            </tr>
-
-                            <?php
-                            }
-                            ?>
 
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered " style="max-width: 35%;">
+                <div class="modal-content ">
+                    <div class="modal-header ">
+                        <h5 class="modal-title text-center" id="exampleModalLabel">Agendar Asesoria</h5>
+                        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3  justify-content-center">
+                            <div class="col-5 ">
+                                <input type="text" class="form-control" placeholder="Documento" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+
+                            <div class="col-5 ms-2">
+                                <input type="text" class="form-control" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="input-group  justify-content-center ">
+                            <div class="col-5 ">
+                                <input type="text" class="form-control" placeholder="Empresa" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            
+                            <div class="col-5 ms-2">
+                                <input type="text" class="form-control" placeholder="Telefono" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Agendar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <?php
-    ?>
 
-    <form id="modal" class="modal2 inactivo">
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <!-- Modal -->
+
 
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="js/index.js"></script>
 
 </html>
